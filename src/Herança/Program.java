@@ -36,13 +36,12 @@ public class Program {
 		acc1.Saque(200);
 		System.out.println(acc1.getSaldo());
 		
-		Conta acc2 = new ContaDeNegocios(1002,"Leandro",1000.0,0.01);
+		Conta acc2 = new ContaDeNegocios(1002, "Leandro", 1000.0, 0.01);
 		acc2.Saque(200);
 		System.out.println(acc2.getSaldo());
 		
-		Conta acc3 = new ContaPoupanca(1003,"Bia",1000.0,500);
+		Conta acc3 = new ContaPoupanca(1003, "Bia", 1000.0, 500);
 		acc3.Saque(200);
 		System.out.println(acc3.getSaldo());
 	}
-
 }
