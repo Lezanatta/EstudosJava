@@ -11,7 +11,10 @@ public class Reserva {
 	private Date checkOut;
 	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	
-	public Reserva(Integer numeroQuarto, Date checkIn, Date checkOut) {
+	public Reserva(Integer numeroQuarto, Date checkIn, Date checkOut) throws DominioException {
+		if(!checkOut.after(checkIn)){
+			throw new DominioException("Erro na reserva! a data de check-out deve ser posterior ao check-in!");
+		}
 		NumeroQuarto = numeroQuarto;
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
@@ -38,18 +41,17 @@ public class Reserva {
 		return TimeUnit.DAYS.convert(diferenca,TimeUnit.MILLISECONDS);		
 	}
 	
-	public String AtualizarData(Date checkIn, Date checkOut) {
+	public void AtualizarData(Date checkIn, Date checkOut) throws DominioException {
 		Date agora = new Date();
 		if(checkIn.before(agora) || checkOut.before(agora)) {
-			return "Erro na reserva! "
-					+ "As datas de reserva para atualização devem ser datas futuras!";
+			throw new DominioException("Erro na reserva! "
+					+ "As datas de reserva para atualização devem ser datas futuras!");
 		}
 		if(!checkOut.after(checkIn)){
-			return "Erro na reserva! a data de check-out deve ser posterior ao check-in!";
+			throw new DominioException("Erro na reserva! a data de check-out deve ser posterior ao check-in!");
 		}
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
-		return null;
 	}
 	
 	@Override
